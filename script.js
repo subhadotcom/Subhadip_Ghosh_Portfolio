@@ -249,4 +249,66 @@ projectCards.forEach(card => {
     card.addEventListener('mouseleave', () => {
         card.style.transform = 'translateY(0)';
     });
+});
+
+// Hero Section Animations
+const heroSection = document.querySelector('.hero');
+const heroContent = document.querySelector('.hero-content');
+const heroImage = document.querySelector('.hero-image');
+
+// Parallax effect for hero section
+window.addEventListener('scroll', () => {
+    const scrollPosition = window.scrollY;
+    if (scrollPosition < window.innerHeight) {
+        heroSection.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+        heroContent.style.transform = `translateX(${scrollPosition * 0.2}px)`;
+        heroImage.style.transform = `translateX(${-scrollPosition * 0.2}px)`;
+    }
+});
+
+// Intersection Observer for hero animations
+const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            heroSection.classList.add('animate');
+            // Trigger typing animation
+            startTypingAnimation();
+        }
+    });
+}, {
+    threshold: 0.5
+});
+
+heroObserver.observe(heroSection);
+
+// Typing Animation
+function startTypingAnimation() {
+    const subtitle = document.querySelector('.hero-subtitle');
+    const text = subtitle.textContent;
+    subtitle.textContent = '';
+    let index = 0;
+
+    function type() {
+        if (index < text.length) {
+            subtitle.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, 100);
+        }
+    }
+
+    type();
+}
+
+// Mouse move effect for hero image
+heroSection.addEventListener('mousemove', (e) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = heroSection.getBoundingClientRect();
+    const x = (clientX - left) / width;
+    const y = (clientY - top) / height;
+
+    heroImage.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+});
+
+heroSection.addEventListener('mouseleave', () => {
+    heroImage.style.transform = 'translate(0, 0)';
 }); 
