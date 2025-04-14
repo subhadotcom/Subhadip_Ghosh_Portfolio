@@ -162,4 +162,34 @@ window.addEventListener('scroll', () => {
             item.classList.add('active');
         }
     });
+});
+
+// Project Animations
+const projectCards = document.querySelectorAll('.project-card');
+
+const projectObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+            projectObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+projectCards.forEach(card => {
+    projectObserver.observe(card);
+});
+
+// Hover Animation for Project Cards
+projectCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px)';
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+    });
 }); 
