@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -7,335 +7,196 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="Subhadip_Ghosh.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <title>Subhadip Ghosh</title>
 </head>
 
 <body>
-    <header id="body-header">
-        <nav>
-            <div class="dropdown-menu text-right">
-                <div class="bars">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <div class="dropdown-list nav-menu">
-                    <ul class="no-list-style">
-                        <li>
-                            <a href="#Home"> Home </a>
-                        </li>
-                        <li>
-                            <a href="#about"> About </a>
-                        </li>
-                        <li>
-                            <a href="#skills"> Skills </a>
-                        </li>
-                        <li>
-                            <a href="#education">Education</a>
-                        </li>
-                        <!-- <li>
-                            <a href="#portfolio">Projects</a>
-                        </li> -->
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <ul class="no-list-style horizontal-list text-center nav-menu">
-                <li>
-                    <a href="#home"> Home </a>
-                </li>
-                <li>
-                    <a href="#about"> About </a>
-                </li>
-                <li>
-                    <a href="#skills"> Skills </a>
-                </li>
-                <li>
-                    <a href="#education">Education</a>
-                </li>
-                <!-- <li>
-                    <a href="#portfolio">Projects</a>
-                </li> -->
-                <li>
-                    <a href="#contact">Contact</a>
-                </li>
-            </ul>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
 
-        </nav>
-
-        <div id="name-social-container">
-            <div class="text-center">
-                <h1 id="my-name">Subhadip Ghosh</h1>
-                <h5 id="Designation">Full Stack Web Developer</h5>
-            </div>
-            
-
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">SG</div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#education" class="nav-link">Education</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
+    </nav>
 
-    </header>
-    <main>
-
-        <section id="about">
-            <div id="my-image">
-                <img src="Subhadip_Ghosh.jpg">
-            </div>
-            <div id="about-para">
-                <p>
-                    Versatile developer with a Bachelor’s in Electronics and Communication Engineering, distinguished for collaborative skills and track record of independently delivering impactful results. Ample experience in full-stack development, delivering well-documented, tested, and operable code. Efficient in collaborating and communicating new ideas and options.
-                </p>
-            </div>
-        </section>
-
-        <section id="skills">
-            <h1 class="section-heading mb75px ">
-                <span>
-                    <i class="fa-solid fa-chalkboard-user"></i>
-                </span>
-                <span> SKILLS </span>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="text-gradient">Subhadip Ghosh</span>
             </h1>
-
-            <div class="card-container">
-                <article>
-                    <figure><img src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-icon.svg" alt=""></figure>
-                </article>
-                <article>
-                    <figure><img src="https://www.vectorlogo.zone/logos/w3_css/w3_css-icon.svg" alt=""></figure>
-                </article>
-                <article>
-                    <figure><img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt=""></figure>
-                </article>
-                <article>
-                    <figure><img src="https://www.vectorlogo.zone/logos/python/python-icon.svg" alt=""></figure>
-                </article>
-                <article>
-                    <figure><img src="https://www.vectorlogo.zone/logos/djangoproject/djangoproject-icon.svg" alt=""></figure>
-                </article>
-                <article>
-                    <figure><img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt=""></figure>
-                </article>
-                <article>
-                    <figure><img src="https://www.vectorlogo.zone/logos/mysql/mysql-official.svg" alt=""></figure>
-                </article>
-                <article>
-                    <figure><img src="https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg" alt=""></figure>
-                </article>
+            <h2 class="hero-subtitle">
+                <span class="typing-text"></span>
+            </h2>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
             </div>
-        </section>
+        </div>
+        <div class="hero-image">
+            <img src="Subhadip_Ghosh.jpg" alt="Subhadip Ghosh">
+        </div>
+    </section>
 
-        <section id="education">
-            <h1 class="section-heading mb75px">
-                <span>
-                    <i class="fa-solid fa-graduation-cap"></i>
-                </span>
-                <span> Education </span>
-            </h1>
-            <div class="timeline">
-                <div class="timeline-box left ">
-                    <div class="timeline-container">
-                        <h3 class="education-designation  m0 m-blue"> Secondary(10th) </h3>
-                        <h4 class="education-company-name "> Chandur High School </h4>
-                        <h5 class="education-duration m0"> 2012 - 2018 </h5>
-                        <p class="education-description text-justify">
-                            Passed out with 76% marks in 2018.
-                        </p>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="Subhadip_Ghosh.jpg" alt="Subhadip Ghosh">
+            </div>
+            <div class="about-text">
+                <p>Versatile developer with a Bachelor's in Electronics and Communication Engineering, distinguished for collaborative skills and track record of independently delivering impactful results.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">3+</span>
+                        <span class="stat-label">Years Experience</span>
                     </div>
-                </div>
-
-                <div class="timeline-box right ">
-                    <div class="timeline-container">
-                        <h3 class="education-designation  m0 m-blue"> Diploma </h3>
-                        <h4 class="education-company-name "> Contai Polytechnic </h4>
-                        <h5 class="education-duration m0"> 2018 - 2021 </h5>
-                        <p class="education-description text-justify">
-                            Passed out from department of Electronics and Telecommunication Engineering with 76% marks.
-                        </p>
+                    <div class="stat-item">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Projects Completed</span>
                     </div>
-                </div>
-
-                <div class="timeline-box left ">
-                    <div class="timeline-container">
-                        <h3 class="education-designation  m0 m-blue"> B.Tech </h3>
-                        <h4 class="education-company-name "> Seacom Engineering College </h4>
-                        <h5 class="education-duration m0"> 2022 - 2025 </h5>
-                        <p class="education-description text-justify">
-                            Pursuing in Department of Electronics and Communication Engineering. 
-                        </p>
-                    </div>
-                </div>
-
-                <div id="timeline-divider">
-                    <div class="timeline-traveller">
-                        <div>
-                            <i class="fa-solid fa-car-side"></i>
-                        </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Happy Clients</span>
                     </div>
                 </div>
             </div>
-        </section>
-<!--
-        <section id="portfolio">
+        </div>
+    </section>
 
-            <h1 class="section-heading mb75px">
-                <span>
-                    <i class="fa-solid fa-bars"></i>
-                </span>
-                <span> Projects </span>
-            </h1>
-
-            <div id="portfolio-container">
-
-                <div class="portfolio-image-container">
-                    <img src="portfolio.png">
-                    <div class="portfolio-details">
-                        <p>
-                            <b> Personal Portfolio Website using Python and Django </b>
-                            <br>
-                            Designed and developed a dynamic portfolio website using Django to showcase professional projects, skills, and achievements.
-                            <br>
-                            1. Implemented a modular architecture for seamless addition of projects, blogs, and certifications. 
-                            <br>
-                            2. Created a responsive, user-friendly interface using HTML, CSS, and Bootstrap for an enhanced user experience.  
-                            <br>  
-                            3.  Integrated a contact form with email notifications using Django’s Email Message module.  
-                            <br>
-                            4.  Leveraged the Django ORM for efficient data management and SQLite for backend storage.  
-                            <br>
-                            5.  Demonstrated expertise in full-stack development, including frontend design and backend functionality.
-                        </p>
-                    </div>
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-icon.svg" alt="HTML5">
                 </div>
-
-                <div class="portfolio-image-container">
-                    <img src="portfolio.png">
-                    <div class="portfolio-details">
-                        <p>
-                            <b> 2048 Game Implementation in Python with Enhanced Features  </b>
-                            <br>
-                            Developed a fully functional 2048 game using Python, implementing grid-based gameplay mechanics and an intuitive user interface.
-                            <br>
-                            1. Designed algorithms for dynamic tile merging, random number generation, and win/lose state detection.    
-                            <br>  
-                            2. Added advanced features like an "Undo" option, move validation, and adaptive grid scaling for different board sizes.     
-                            <br>
-                            3. Enhanced game performance by optimizing algorithmic efficiency and leveraging modular, object-oriented programming. 
-                            <br>
-                            4. Gained experience in Python game development, library integration, and user-focused design.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="portfolio-image-container">
-                    <img src="portfolio.png">
-                    <div class="portfolio-details">
-                        <p>
-                            <b>  Attendance Management System Website using Python and Django </b>
-                            <br>
-                            Developed a robust web-based Attendance Management System to streamline attendance tracking for students/employees
-                            <br>
-                            1. Implemented role-based authentication for administrators, instructors, and users, ensuring data security and personalized access. 
-                            <br>
-                            2. Designed features to record, update, and generate attendance reports, with real-time status tracking.   
-                            <br>  
-                            3.  Utilized Django’s ORM to handle database operations and integrated SQLite for data storage.   
-                            <br>
-                            4. Added data visualization using matplotlib to display attendance statistics and trends. 
-                            <br>
-                            5. Improved efficiency in attendance management through automated email notifications for absenteeism. 
-                        </p>
-                    </div>
-                </div>
-
-                <div class="portfolio-image-container">
-                    <img src="portfolio.png">
-                    <div class="portfolio-details">
-                        <p>
-                            <b> Blog Management System Website using Python and Django </b>
-                            <br>
-                            Built a dynamic Blog Management System to enable content creation, editing, and publishing.   
-                            <br>
-                            1.  Implemented user authentication and role-based permissions for administrators, authors, and readers using Django’s built-in authentication system. 
-                            <br>
-                            2. Designed a clean, responsive UI with Bootstrap, ensuring seamless navigation across devices.    
-                            <br>  
-                            3.  Utilized Django’s ORM for efficient database management with SQLite/PostgreSQL for data storage.  
-                            <br>
-                            4.  Enabled features like search functionality, post tagging, and pagination to enhance user experience.
-                            <br>
-                            5.  Showcased expertise in full-stack development, combining Django for backend logic and modern frontend frameworks for an engaging interface.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </section> -->
-
-        <section id="contact">
-            <h1 class="section-heading mb50px">
-                <span>
-                    <i class="fa-regular fa-address-card"></i>
-                </span>
-                <span> Contact </span>
-            </h1>
-            <div id="contact-container">
-
-                <div id="contact-form-container">
-                    <form id="contact-form" action="https://formsubmit.co/subhadipghosh@outlook.in" method="POST">
-                        <input id="input-name" name="name" type="text" placeholder="Your Name">
-                        <input id="input-email" name="input-email" type="text" required placeholder="Your Email">
-                        <textarea id="input-message" name="input-message" rows="2" cols=40
-                            placeholder="Message"></textarea>
-                        <button class="sub-btn" type="submit">SEND MESSAGE</button>
-                    </form>
-                </div>
-                <div id="my-details-container">
-
-                    <h3> My Address </h3>
-                    <div class="my-details-info-container">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Chandrakona, West bengal, India</span>
-                    </div>
-
-                    <div class="my-details-info-container">
-                        <i class="fa-regular fa-envelope"></i>
-                        <span>subhadipghosh@outlook.in</span>
-                    </div>
+                <h3>HTML5</h3>
+                <div class="skill-progress">
+                    <div class="progress-bar" data-progress="90"></div>
                 </div>
             </div>
-
-            <div class="text-center social-icons">
-
-                <ul class="no-list-style horizontal-list">
-
-                    <li>
-                        <a href="https://www.linkedin.com/in/subhadotcom/" target="_blank">
-                            <i class="fa-brands fa-linkedin"></i>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://github.com/subhadotcom/" target="_blank">
-                            <i class="fa-brands fa-github"></i>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://stackoverflow.com/users/22170873/" target="_blank">
-                            <i class="fa-brands fa-stack-overflow"></i>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://twitter.com/subhadipdotcom/" target="_blank">
-                            <i class="fa-brands fa-twitter"></i>
-                        </a>
-                    </li>
-
-                </ul>
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="https://www.vectorlogo.zone/logos/w3_css/w3_css-icon.svg" alt="CSS3">
+                </div>
+                <h3>CSS3</h3>
+                <div class="skill-progress">
+                    <div class="progress-bar" data-progress="85"></div>
+                </div>
             </div>
-        </section>
-    </main>
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="https://www.vectorlogo.zone/logos/python/python-icon.svg" alt="Python">
+                </div>
+                <h3>Python</h3>
+                <div class="skill-progress">
+                    <div class="progress-bar" data-progress="80"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="https://www.vectorlogo.zone/logos/djangoproject/djangoproject-icon.svg" alt="Django">
+                </div>
+                <h3>Django</h3>
+                <div class="skill-progress">
+                    <div class="progress-bar" data-progress="75"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Secondary(10th)</h3>
+                    <h4>Chandur High School</h4>
+                    <p>2012 - 2018</p>
+                    <p>Passed out with 76% marks in 2018.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Diploma</h3>
+                    <h4>Contai Polytechnic</h4>
+                    <p>2018 - 2021</p>
+                    <p>Passed out from department of Electronics and Telecommunication Engineering with 76% marks.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>B.Tech</h3>
+                    <h4>Seacom Engineering College</h4>
+                    <p>2022 - 2025</p>
+                    <p>Pursuing in Department of Electronics and Communication Engineering.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Chandrakona, West Bengal, India</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>subhadipghosh@outlook.in</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/subhadotcom/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/subhadotcom/" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://stackoverflow.com/users/22170873/" target="_blank"><i class="fab fa-stack-overflow"></i></a>
+                    <a href="https://twitter.com/subhadipdotcom/" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" required>
+                    <label for="name">Your Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required>
+                    <label for="email">Your Email</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" required></textarea>
+                    <label for="message">Your Message</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
