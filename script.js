@@ -126,23 +126,82 @@ contactForm.addEventListener('submit', (e) => {
 // Mobile Navigation
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
+const navItems = document.querySelectorAll('.nav-link');
 
 hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
     hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
 });
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-        navLinks.classList.remove('active');
         hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+    }
+});
+
+// Close mobile menu when clicking a nav item
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+    });
+});
+
+// Touch interactions for project cards
+const projectCards = document.querySelectorAll('.project-card');
+
+projectCards.forEach(card => {
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    card.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    card.addEventListener('touchmove', (e) => {
+        touchEndY = e.touches[0].clientY;
+        const diff = touchStartY - touchEndY;
+        
+        if (diff > 50) { // Swipe up
+            card.style.transform = 'translateY(-10px)';
+        } else if (diff < -50) { // Swipe down
+            card.style.transform = 'translateY(0)';
+        }
+    }, { passive: true });
+
+    card.addEventListener('touchend', () => {
+        setTimeout(() => {
+            card.style.transform = 'translateY(0)';
+        }, 300);
+    }, { passive: true });
+});
+
+// Prevent scroll when mobile menu is open
+const preventScroll = (e) => {
+    if (navLinks.classList.contains('active')) {
+        e.preventDefault();
+    }
+};
+
+document.addEventListener('touchmove', preventScroll, { passive: false });
+document.addEventListener('wheel', preventScroll, { passive: false });
+
+// Remove scroll prevention when menu is closed
+const enableScroll = () => {
+    document.removeEventListener('touchmove', preventScroll);
+    document.removeEventListener('wheel', preventScroll);
+};
+
+hamburger.addEventListener('click', () => {
+    if (!navLinks.classList.contains('active')) {
+        enableScroll();
     }
 });
 
 // Active Navigation Link
 const sections = document.querySelectorAll('section');
-const navItems = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
     let current = '';
@@ -165,8 +224,6 @@ window.addEventListener('scroll', () => {
 });
 
 // Project Animations
-const projectCards = document.querySelectorAll('.project-card');
-
 const projectObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
