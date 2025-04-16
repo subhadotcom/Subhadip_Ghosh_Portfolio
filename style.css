@@ -499,7 +499,7 @@ body {
     position: fixed;
     top: 1rem;
     right: 1rem;
-    z-index: 1001;
+    /* z-index: 1001; */
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
