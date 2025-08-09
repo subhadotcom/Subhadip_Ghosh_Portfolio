@@ -178,6 +178,7 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     // Get form elements
     const name = document.getElementById('name');
     const email = document.getElementById('email');
+    const subject = document.getElementById('subject');
     const message = document.getElementById('message');
     const form = this;
     
@@ -554,21 +555,27 @@ function initContactForm() {
             // Submit the form
             const response = await fetch(form.action, {
                 method: 'POST',
-                body: new FormData(form),
+                body: formData,
                 headers: {
                     'Accept': 'application/json'
                 }
+            })
+            .then(response => {
+                if (response.ok) {
+                    form.reset();
+                    showSuccessMessage('Your message has been sent successfully! I\'ll get back to you soon.');
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showSuccessMessage('There was a problem sending your message. Please try again later or contact me directly at subhadipghosh@outlook.in', true);
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
             });
-            
-            if (response.ok) {
-                // Show success message
-                showSuccessMessage('Message sent successfully! I\'ll get back to you soon.');
-                form.reset();
-            } else {
-                throw new Error('Failed to send message. Please try again later.');
-            }
-            
-        } catch (error) {
             // Show error message
             const errorMessage = error.message || 'An error occurred. Please try again.';
             showSuccessMessage(errorMessage, true);
