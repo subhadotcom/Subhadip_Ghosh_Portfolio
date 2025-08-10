@@ -171,139 +171,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // Throttled scroll event for better performance
 window.addEventListener('scroll', throttle(revealOnScroll, 16));
 
-// Contact Form Validation and Submission
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form elements
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const subject = document.getElementById('subject');
-    const message = document.getElementById('message');
-    const form = this;
-    
-    // Clear previous errors
-    clearErrors();
-    
-    let isValid = true;
-    
-    // Validate name
-    if (name.value.trim() === '') {
-        showError('name', 'Name is required');
-        isValid = false;
-    } else if (name.value.trim().length < 2) {
-        showError('name', 'Name must be at least 2 characters long');
-        isValid = false;
-    }
-    
-    // Validate email
-    if (email.value.trim() === '') {
-        showError('email', 'Email is required');
-        isValid = false;
-    } else if (!isValidEmail(email.value.trim())) {
-        showError('email', 'Please enter a valid email address');
-        isValid = false;
-    }
-    
-    // Validate message
-    if (message.value.trim() === '') {
-        showError('message', 'Message is required');
-        isValid = false;
-    } else if (message.value.trim().length < 10) {
-        showError('message', 'Message must be at least 10 characters long');
-        isValid = false;
-    }
-    
-    // If form is valid, simulate submission
-    if (isValid) {
-        // Add loading state
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        submitBtn.disabled = true;
-        form.classList.add('loading');
-        
-        // Simulate form submission delay
-        setTimeout(() => {
-            // Reset form
-            form.reset();
-            form.classList.remove('loading');
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-            
-            // Show success message
-            showSuccessMessage('Thank you for your message! I\'ll get back to you soon.');
-            
-            // In a real application, you would send the form data to a server
-            console.log('Form submitted:', {
-                name: name.value.trim(),
-                email: email.value.trim(),
-                subject: document.getElementById('subject').value.trim(),
-                message: message.value.trim()
-            });
-        }, 2000);
-    }
-});
-
-// Email validation function
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Show error message
-function showError(fieldName, message) {
-    const field = document.getElementById(fieldName);
-    const errorElement = document.getElementById(fieldName + '-error');
-    
-    field.classList.add('error');
-    errorElement.textContent = message;
-    errorElement.classList.add('show');
-    
-    // Remove error on input
-    field.addEventListener('input', function() {
-        field.classList.remove('error');
-        errorElement.classList.remove('show');
-    }, { once: true });
-}
-
-// Clear all errors
-function clearErrors() {
-    const errorMessages = document.querySelectorAll('.error-message');
-    const fields = document.querySelectorAll('.form-group input, .form-group textarea');
-    
-    errorMessages.forEach(error => {
-        error.classList.remove('show');
-    });
-    
-    fields.forEach(field => {
-        field.classList.remove('error');
-    });
-}
-
-// Show success message
-function showSuccessMessage(message) {
-    // Remove existing success message if any
-    const existingMessage = document.querySelector('.success-message');
-    if (existingMessage) {
-        existingMessage.remove();
-    }
-    
-    // Create and show new success message
-    const successDiv = document.createElement('div');
-    successDiv.className = 'success-message';
-    successDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
-    
-    const form = document.getElementById('contact-form');
-    form.appendChild(successDiv);
-    successDiv.classList.add('show');
-    
-    // Remove success message after 5 seconds
-    setTimeout(() => {
-        successDiv.remove();
-    }, 5000);
-}
-
 // Navigation Highlighting with Intersection Observer
 function initNavigationHighlighting() {
     const sections = document.querySelectorAll('section[id]');
@@ -522,107 +389,69 @@ function initSkillTilt() {
     });
 }
 
-// Form Submission Handling
-function initContactForm() {
-    const form = document.getElementById('contact-form');
-    if (!form) return;
-
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        // Get form elements
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalButtonText = submitButton.innerHTML;
-        
-        try {
-            // Disable submit button and show loading state
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+// Handle contact form submission
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // Simple form validation
-            const name = form.elements['name'].value.trim();
-            const email = form.elements['email'].value.trim();
-            const message = form.elements['message'].value.trim();
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
             
-            if (!name || !email || !message) {
-                throw new Error('Please fill in all required fields');
-            }
-            
-            if (!isValidEmail(email)) {
-                throw new Error('Please enter a valid email address');
-            }
-            
-            // Submit the form
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
+            try {
+                // Disable the submit button and show loading state
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                
+                // Get form data
+                const formData = new FormData(this);
+                
+                // Send form data to FormSubmit
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
                 if (response.ok) {
-                    form.reset();
-                    showSuccessMessage('Your message has been sent successfully! I\'ll get back to you soon.');
+                    // Show success message near the button
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'form-success-message';
+                    successMessage.textContent = 'Thanks for your message! I will get back to you soon.';
+                    
+                    // Insert after the submit button
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    submitButton.parentNode.insertBefore(successMessage, submitButton.nextSibling);
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Remove message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.remove();
+                    }, 5000);
                 } else {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Form submission failed');
                 }
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error:', error);
-                showSuccessMessage('There was a problem sending your message. Please try again later or contact me directly at subhadipghosh@outlook.in', true);
-            })
-            .finally(() => {
+                alert('Oops! Something went wrong. Please try again later or contact me directly at connect@subhadipghosh.co.in');
+            } finally {
+                // Re-enable the submit button and restore original text
                 submitButton.disabled = false;
                 submitButton.innerHTML = originalButtonText;
-            });
-            // Show error message
-            const errorMessage = error.message || 'An error occurred. Please try again.';
-            showSuccessMessage(errorMessage, true);
-        } finally {
-            // Re-enable submit button
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalButtonText;
-        }
-    });
-}
-
-// Helper function to validate email
-function isValidEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-// Show success/error message
-function showSuccessMessage(message, isError = false) {
-    // Remove any existing messages
-    const existingMessage = document.querySelector('.form-message');
-    if (existingMessage) {
-        existingMessage.remove();
+            }
+        });
     }
-    
-    const form = document.getElementById('contact-form');
-    if (!form) return;
-    
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `form-message ${isError ? 'error' : 'success'}`;
-    messageDiv.textContent = message;
-    
-    // Insert message after the form
-    form.parentNode.insertBefore(messageDiv, form.nextSibling);
-    
-    // Auto-hide message after 5 seconds
-    setTimeout(() => {
-        messageDiv.style.opacity = '0';
-        setTimeout(() => messageDiv.remove(), 300);
-    }, 5000);
-}
+});
 
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Portfolio website loaded successfully!');
     initSkillTilt();
-    initContactForm();
     
     // Initialize all new features
     initProjectCardsSequentialReveal();
