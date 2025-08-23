@@ -408,12 +408,14 @@ window.addEventListener(
   }, 16)
 ); // ~60fps
 
-// Skill Card Tilt Effect
-function initializeSkillTiltEffect() {
+
+
+// Simple Tilt Effect for Skill Cards
+function initSkillTilt() {
   const skillCards = document.querySelectorAll(".skill-category");
 
   skillCards.forEach((card) => {
-    card.addEventListener("mousemove", function (e) {
+    card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -421,50 +423,15 @@ function initializeSkillTiltEffect() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      // Calculate rotation based on cursor position
-      const rotateX = ((y - centerY) / centerY) * -12; // Max 12 degrees
-      const rotateY = ((x - centerX) / centerX) * 12; // Max 12 degrees
+      // Calculate gentle tilt based on cursor position (max 5 degrees)
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
 
-      card.style.setProperty("--rotate-x", `${rotateX}deg`);
-      card.style.setProperty("--rotate-y", `${rotateY}deg`);
-    });
-
-    card.addEventListener("mouseleave", function () {
-      // Reset rotation when mouse leaves
-      card.style.setProperty("--rotate-x", "0deg");
-      card.style.setProperty("--rotate-y", "0deg");
-    });
-  });
-}
-
-// 3D Tilt Effect for Skill Cards
-function initSkillTilt() {
-  const skillCards = document.querySelectorAll(".skill-category");
-
-  skillCards.forEach((card) => {
-    const height = card.clientHeight;
-    const width = card.clientWidth;
-
-    card.addEventListener("mousemove", (e) => {
-      const xVal = e.pageX - card.offsetLeft;
-      const yVal = e.pageY - card.offsetTop;
-
-      const yRotation = 20 * ((xVal - width / 2) / width);
-      const xRotation = -20 * ((yVal - height / 2) / height);
-
-      const transformString = `perspective(500px) scale(1.05) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
-      const boxShadow = `${
-        -yRotation / 2
-      }px ${xRotation}px 15px rgba(0, 0, 0, 0.4)`;
-
-      card.style.transform = transformString;
-      card.style.boxShadow = boxShadow;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
     card.addEventListener("mouseleave", () => {
-      card.style.transform =
-        "perspective(500px) scale(1) rotateX(0) rotateY(0)";
-      card.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.2)";
+      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)";
     });
   });
 }
@@ -566,7 +533,6 @@ document.addEventListener("DOMContentLoaded", function () {
   initNavbarShrinking();
   initDarkMode();
   createScrollToTopButton();
-  initializeSkillTiltEffect();
 
   // Initialize existing scroll reveal animations
   initializeScrollReveal();
