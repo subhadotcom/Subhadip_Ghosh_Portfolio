@@ -221,9 +221,11 @@ function initNavigationHighlighting() {
   const navLinks = document.querySelectorAll(".nav-link");
 
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "-100px 0px -60% 0px",
+    threshold: [0.1, 0.3, 0.5, 0.7],
+    rootMargin: "-80px 0px -50% 0px",
   };
+
+  let currentActiveSection = null;
 
   const sectionObserver = new IntersectionObserver((entries) => {
     let visibleSections = [];
@@ -233,33 +235,58 @@ function initNavigationHighlighting() {
         visibleSections.push({
           element: entry.target,
           ratio: entry.intersectionRatio,
+          top: entry.boundingClientRect.top,
         });
       }
     });
 
-    // Sort by intersection ratio to get the most visible section
-    visibleSections.sort((a, b) => b.ratio - a.ratio);
-
     if (visibleSections.length > 0) {
-      const targetId = visibleSections[0].element.getAttribute("id");
-
-      // Remove active class from all nav links
-      navLinks.forEach((link) => {
-        link.classList.remove("nav-active");
+      // Sort by intersection ratio first, then by position
+      visibleSections.sort((a, b) => {
+        if (Math.abs(a.ratio - b.ratio) < 0.1) {
+          return Math.abs(a.top) - Math.abs(b.top);
+        }
+        return b.ratio - a.ratio;
       });
 
-      // Add active class to current section's nav link
-      const activeLink = document.querySelector(
-        `.nav-link[href="#${targetId}"]`
-      );
-      if (activeLink) {
-        activeLink.classList.add("nav-active");
+      const targetId = visibleSections[0].element.getAttribute("id");
+
+      // Only update if the active section has changed
+      if (currentActiveSection !== targetId) {
+        currentActiveSection = targetId;
+
+        // Remove active class from all nav links
+        navLinks.forEach((link) => {
+          link.classList.remove("nav-active");
+        });
+
+        // Add active class to current section's nav link
+        const activeLink = document.querySelector(
+          `.nav-link[href="#${targetId}"]`
+        );
+        if (activeLink) {
+          activeLink.classList.add("nav-active");
+        }
       }
     }
   }, observerOptions);
 
   sections.forEach((section) => {
     sectionObserver.observe(section);
+  });
+
+  // Handle scroll to top case (show home as active)
+  window.addEventListener('scroll', function() {
+    if (window.scrollY < 100) {
+      navLinks.forEach((link) => {
+        link.classList.remove("nav-active");
+      });
+      const homeLink = document.querySelector('.nav-link[href="#home"]');
+      if (homeLink) {
+        homeLink.classList.add("nav-active");
+        currentActiveSection = 'home';
+      }
+    }
   });
 }
 
