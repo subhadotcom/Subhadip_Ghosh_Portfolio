@@ -436,6 +436,51 @@ function initSkillTilt() {
   });
 }
 
+// Mobile Footer Layout Management
+function handleMobileFooterLayout() {
+  const footerContent = document.querySelector('.footer-content');
+  const footerLeft = document.querySelector('.footer-left');
+  const footerRight = document.querySelector('.footer-right');
+  
+  if (!footerContent || !footerLeft || !footerRight) return;
+  
+  function updateFooterLayout() {
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      // On mobile: center footer-left and hide footer-right
+      footerContent.style.flexDirection = 'column';
+      footerContent.style.alignItems = 'center';
+      footerContent.style.textAlign = 'center';
+      
+      footerLeft.style.display = 'block';
+      footerLeft.style.width = '100%';
+      footerLeft.style.textAlign = 'center';
+      footerLeft.style.marginBottom = '0';
+      
+      footerRight.style.display = 'none';
+    } else {
+      // On desktop: restore original layout
+      footerContent.style.flexDirection = 'row';
+      footerContent.style.alignItems = 'center';
+      footerContent.style.textAlign = 'left';
+      
+      footerLeft.style.display = 'block';
+      footerLeft.style.width = 'auto';
+      footerLeft.style.textAlign = 'left';
+      footerLeft.style.marginBottom = '0';
+      
+      footerRight.style.display = 'flex';
+    }
+  }
+  
+  // Initial call
+  updateFooterLayout();
+  
+  // Update on window resize
+  window.addEventListener('resize', updateFooterLayout);
+}
+
 // Handle contact form submission
 document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contact-form");
@@ -518,12 +563,172 @@ window.addEventListener('resize', function() {
   }
 });
 
+// Magnetic cursor effect for interactive elements
+function initMagneticCursor() {
+  const cursor = document.createElement('div');
+  cursor.className = 'magnetic-cursor';
+  document.body.appendChild(cursor);
+
+  const cursorDot = document.createElement('div');
+  cursorDot.className = 'cursor-dot';
+  document.body.appendChild(cursorDot);
+
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.1;
+    cursorY += (mouseY - cursorY) * 0.1;
+    
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+    
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+    
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Add hover effects for interactive elements
+  const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-category, .social-link');
+  
+  interactiveElements.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('cursor-grow');
+      cursorDot.classList.add('cursor-dot-hidden');
+    });
+    
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('cursor-grow');
+      cursorDot.classList.remove('cursor-dot-hidden');
+    });
+  });
+}
+
+// Advanced typewriter effect for hero title
+function initTypewriterEffect() {
+  const heroTitle = document.querySelector('.hero-title');
+  if (!heroTitle) return;
+
+  const text = heroTitle.textContent;
+  heroTitle.textContent = '';
+  heroTitle.classList.add('typewriter');
+  
+  let i = 0;
+  function typeChar() {
+    if (i < text.length) {
+      heroTitle.textContent += text.charAt(i);
+      i++;
+      setTimeout(typeChar, 100);
+    } else {
+      heroTitle.classList.remove('typewriter');
+    }
+  }
+  
+  setTimeout(typeChar, 1000);
+}
+
+// Parallax scrolling effect
+function initParallaxEffect() {
+  const parallaxElements = document.querySelectorAll('.hero-avatar, .profile-photo');
+  
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.5;
+    
+    parallaxElements.forEach(el => {
+      el.style.transform = `translateY(${rate}px)`;
+    });
+  });
+}
+
+// Enhanced project card interactions
+function initProjectCardInteractions() {
+  const projectCards = document.querySelectorAll('.project-card');
+  
+  projectCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.02)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
+    });
+  });
+}
+
+// Smooth page transitions
+function initSmoothTransitions() {
+  const links = document.querySelectorAll('a[href^="#"]');
+  
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        const headerOffset = 80;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+}
+
+// Text animation on scroll
+function initTextAnimations() {
+  const textElements = document.querySelectorAll('.section-title, .section-subtitle');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'slideInFromLeft 0.8s ease-out';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  textElements.forEach(el => observer.observe(el));
+}
+
 // Initialize all functionality when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   console.log("Portfolio website loaded successfully!");
   
   // Apply mobile fixes first
   fixMobileViewport();
+  
+  // Initialize new modern effects
+  if (window.innerWidth > 768) {
+    initMagneticCursor();
+    initParallaxEffect();
+  }
+  
+  initTypewriterEffect();
+  initProjectCardInteractions();
+  initSmoothTransitions();
+  initTextAnimations();
+  handleMobileFooterLayout();
   
   initSkillTilt();
 
@@ -547,7 +752,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }, 200);
 });
-
 
 
 // Disable right-click, keyboard shortcuts, and browser inspection
