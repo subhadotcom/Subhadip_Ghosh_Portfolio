@@ -1,20 +1,61 @@
+// Immediate mobile responsiveness fix
+function fixMobileViewport() {
+  // Ensure viewport meta tag is properly set
+  let viewport = document.querySelector("meta[name=viewport]");
+  if (viewport) {
+    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
+  }
+  
+  // Force layout recalculation on mobile
+  if (window.innerWidth <= 768) {
+    document.body.style.minWidth = '320px';
+    document.documentElement.style.overflowX = 'hidden';
+    document.body.style.overflowX = 'hidden';
+  }
+}
+
+// Apply mobile fixes immediately
+fixMobileViewport();
+
 // Mobile Navigation Toggle
 document.addEventListener("DOMContentLoaded", function () {
+  // Apply mobile fixes again when DOM is ready
+  fixMobileViewport();
+  
   const mobileMenu = document.getElementById("mobile-menu");
   const navMenu = document.querySelector(".nav-menu");
 
-  mobileMenu.addEventListener("click", function () {
-    mobileMenu.classList.toggle("active");
-    navMenu.classList.toggle("active");
-  });
-
-  // Close mobile menu when clicking on a link
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.remove("active");
-      navMenu.classList.remove("active");
+  if (mobileMenu && navMenu) {
+    mobileMenu.addEventListener("click", function () {
+      mobileMenu.classList.toggle("active");
+      navMenu.classList.toggle("active");
+      
+      // Prevent body scroll when menu is open
+      if (navMenu.classList.contains("active")) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
     });
-  });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+        navMenu.classList.remove("active");
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!mobileMenu.contains(event.target) && !navMenu.contains(event.target)) {
+        mobileMenu.classList.remove("active");
+        navMenu.classList.remove("active");
+        document.body.style.overflow = '';
+      }
+    });
+  }
 });
 
 // Smooth Scrolling for Navigation Links
@@ -467,9 +508,29 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Window resize handler for mobile responsiveness
+window.addEventListener('resize', function() {
+  fixMobileViewport();
+  
+  // Close mobile menu on resize to larger screen
+  if (window.innerWidth > 768) {
+    const mobileMenu = document.getElementById("mobile-menu");
+    const navMenu = document.querySelector(".nav-menu");
+    if (mobileMenu && navMenu) {
+      mobileMenu.classList.remove("active");
+      navMenu.classList.remove("active");
+      document.body.style.overflow = '';
+    }
+  }
+});
+
 // Initialize all functionality when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   console.log("Portfolio website loaded successfully!");
+  
+  // Apply mobile fixes first
+  fixMobileViewport();
+  
   initSkillTilt();
 
   // Initialize all new features
@@ -485,4 +546,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initial check for elements already in viewport
   setTimeout(revealOnScroll, 100);
+  
+  // Force a layout recalculation for mobile
+  setTimeout(() => {
+    if (window.innerWidth <= 768) {
+      window.dispatchEvent(new Event('resize'));
+    }
+  }, 200);
 });
