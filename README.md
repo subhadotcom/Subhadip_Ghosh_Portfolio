@@ -7,7 +7,6 @@ A modern, responsive, and feature-rich personal portfolio website showcasing dat
 
 ```
 portfolio/
-├── .replit                    # Replit configuration
 ├── CNAME                      # Custom domain configuration
 ├── README.md                  # Project documentation
 ├── index.html                 # Main HTML structure
