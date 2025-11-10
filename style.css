@@ -692,6 +692,7 @@ section {
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
 .contact-info h3 {
@@ -707,13 +708,15 @@ section {
 .contact-info p {
   color: #b3e5fc;
   line-height: 1.8;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
   font-size: 1.1rem;
 }
 
 .social-links {
   display: flex;
+  justify-content: center;
   gap: 1.5rem;
+  margin: 1.5rem 0 2.5rem 0;
 }
 
 .social-link {
@@ -769,7 +772,7 @@ section {
   background: rgba(10, 10, 20, 0.9);
   border-top: 1px solid rgba(100, 181, 246, 0.2);
   color: white;
-  padding: 3rem 2rem;
+  padding: 1.5rem 1rem;
   backdrop-filter: blur(15px);
   width: 100%;
   box-sizing: border-box;
@@ -780,7 +783,7 @@ section {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -793,9 +796,10 @@ section {
 
 .footer-left p {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #b3e5fc;
   font-weight: 500;
+  line-height: 1.4;
 }
 
 .footer-right {
@@ -1291,7 +1295,7 @@ section {
   }
 
   .footer {
-    padding: 2.5rem 1rem;
+    padding: 1.25rem 1rem;
   }
 
   .footer-content {
@@ -1375,7 +1379,7 @@ section {
   }
 
   .footer {
-    padding: 2rem 1rem;
+    padding: 1.25rem 1rem;
   }
 
   .footer-content {
@@ -1437,7 +1441,7 @@ section {
   }
 
   .footer {
-    padding: 1.5rem 0.75rem;
+    padding: 1rem 0.75rem;
   }
 
   .footer-content {
