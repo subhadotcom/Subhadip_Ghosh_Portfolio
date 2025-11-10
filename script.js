@@ -648,27 +648,19 @@ function initParallaxEffect() {
   });
 }
 
-// Enhanced project card interactions
+// Project card hover effects
 function initProjectCardInteractions() {
   const projectCards = document.querySelectorAll('.project-card');
   
   projectCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = (y - centerY) / 20;
-      const rotateY = (centerX - x) / 20;
-      
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.02)`;
+    card.addEventListener('mouseenter', () => {
+      card.style.transform = 'translateY(-10px) scale(1.02)';
+      card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.2)';
     });
     
     card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
+      card.style.transform = 'translateY(0) scale(1)';
+      card.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
     });
   });
 }
