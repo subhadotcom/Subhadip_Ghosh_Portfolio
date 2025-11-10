@@ -684,10 +684,14 @@ section {
 }
 
 .contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .contact-info h3 {
@@ -1282,8 +1286,8 @@ section {
   }
 
   .contact-content {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    padding: 2rem 1rem;
+    min-height: auto;
   }
 
   .footer {
