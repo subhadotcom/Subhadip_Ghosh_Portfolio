@@ -681,47 +681,51 @@ section {
 .contact {
   background: rgba(15, 15, 35, 0.8);
   backdrop-filter: blur(15px);
+  padding: 1rem 0;
 }
 
 .contact-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 60vh;
+  justify-content: flex-start;
+  min-height: 30vh;
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .contact-info h3 {
-  font-size: 2.2rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  margin: 0.5rem 0;
   background: linear-gradient(135deg, #64b5f6, #90caf9);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .contact-info p {
   color: #b3e5fc;
-  line-height: 1.8;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 0.5rem 0 0.5rem 0;
+  font-size: 1rem;
 }
 
 .social-links {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  margin: 1.5rem 0 2.5rem 0;
+  gap: 0.8rem;
+  margin: 0.5rem 0 0.75rem 0;
+  padding: 0.25rem 0;
 }
 
 .social-link {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background: linear-gradient(135deg, rgba(100, 181, 246, 0.2), rgba(66, 165, 245, 0.2));
   color: #64b5f6;
   display: flex;
@@ -729,8 +733,8 @@ section {
   justify-content: center;
   border-radius: 50%;
   text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.3rem;
   border: 1px solid rgba(100, 181, 246, 0.3);
   backdrop-filter: blur(10px);
   position: relative;
@@ -1290,7 +1294,7 @@ section {
   }
 
   .contact-content {
-    padding: 2rem 1rem;
+    padding: 0.5rem 1rem;
     min-height: auto;
   }
 
