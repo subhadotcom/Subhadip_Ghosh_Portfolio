@@ -847,6 +847,17 @@ section {
   font-weight: 500;
 }
 
+.certification-link {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: rgba(100, 181, 246, 0.1);
+  border-radius: 20px;
+  text-decoration: none;
+  color: #64b5f6;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
 /* Responsive adjustments for Experience */
 @media (max-width: 768px) {
   .experience-timeline::before {
