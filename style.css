@@ -665,6 +665,29 @@ section {
   transform: translateY(-2px);
 }
 
+.experience-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.experience-tech span {
+  background: rgba(100, 181, 246, 0.2);
+  color: #90caf9;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid rgba(100, 181, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.experience-tech span:hover {
+  background: rgba(100, 181, 246, 0.3);
+  transform: translateY(-2px);
+}
+
 .project-link {
   display: inline-flex;
   align-items: center;
