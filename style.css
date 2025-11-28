@@ -11,6 +11,147 @@ html {
   -ms-text-size-adjust: 100%;
 }
 
+/* Scroll Reveal Animations */
+@keyframes revealFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes revealFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes revealScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes revealRotate {
+  from {
+    opacity: 0;
+    transform: rotate(-5deg) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) translateY(0);
+  }
+}
+
+/* Reveal Element Styles */
+.reveal-bottom,
+.reveal-left,
+.reveal-right,
+.reveal-scale,
+.reveal-rotate {
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal-bottom {
+  transform: translateY(40px);
+}
+
+.reveal-bottom.active {
+  opacity: 1;
+  transform: translateY(0);
+  animation: revealFromBottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.reveal-left {
+  transform: translateX(-40px);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+  animation: revealFromLeft 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.reveal-right {
+  transform: translateX(40px);
+}
+
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+  animation: revealFromRight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.reveal-scale {
+  transform: scale(0.9);
+}
+
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale(1);
+  animation: revealScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.reveal-rotate {
+  transform: rotate(-5deg) translateY(30px);
+}
+
+.reveal-rotate.active {
+  opacity: 1;
+  transform: rotate(0) translateY(0);
+  animation: revealRotate 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Staggered Animation Delays */
+.reveal-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.reveal-delay-4 {
+  animation-delay: 0.4s;
+}
+
+.reveal-delay-5 {
+  animation-delay: 0.5s;
+}
+
+.reveal-delay-6 {
+  animation-delay: 0.6s;
+}
+
 /* Ensure proper viewport behavior on mobile */
 @viewport {
   width: device-width;

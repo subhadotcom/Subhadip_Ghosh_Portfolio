@@ -85,7 +85,35 @@ window.addEventListener("scroll", function () {
   }
 });
 
-// Enhanced Scroll Reveal Animation System with Sequential Project Cards
+// Enhanced Scroll Reveal Animation System with Intersection Observer
+function initScrollReveal() {
+  // Create Intersection Observer for better performance
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px' // Start animation 50px before element enters viewport
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        // Unobserve after animation to save performance
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all reveal elements
+  const revealElements = document.querySelectorAll('[class*="reveal-"]');
+  revealElements.forEach(element => {
+    observer.observe(element);
+  });
+}
+
+// Call on page load
+document.addEventListener('DOMContentLoaded', initScrollReveal);
+
+// Fallback for older browsers without Intersection Observer
 function revealOnScroll() {
   const reveals = document.querySelectorAll('[class*="reveal-"]:not(.active)');
   const windowHeight = window.innerHeight;
@@ -98,6 +126,13 @@ function revealOnScroll() {
     }
   });
 }
+
+// Add scroll event listener as fallback
+window.addEventListener('scroll', () => {
+  if (!window.IntersectionObserver) {
+    revealOnScroll();
+  }
+});
 
 // Sequential reveal for project cards using Intersection Observer
 function initProjectCardsSequentialReveal() {
