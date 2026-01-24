@@ -17,6 +17,7 @@ html {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -28,6 +29,7 @@ html {
     opacity: 0;
     transform: translateX(-40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -39,6 +41,7 @@ html {
     opacity: 0;
     transform: translateX(40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -50,6 +53,7 @@ html {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -61,6 +65,7 @@ html {
     opacity: 0;
     transform: rotate(-5deg) translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: rotate(0) translateY(0);
@@ -205,19 +210,26 @@ body::after {
   padding: 0 50px;
 }
 
-/* Enhanced Navigation Styles */
+/* Enhanced Navigation Styles - Glassmorphic Design */
 .navbar {
-  background: rgba(15, 15, 35, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(15, 15, 35, 0.4);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   position: fixed;
-  top: 0;
-  width: 100%;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1400px;
   z-index: 1000;
   padding: 1rem 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+    0 0 60px rgba(100, 181, 246, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
   min-height: 70px;
   display: flex;
   align-items: center;
@@ -359,6 +371,17 @@ body::after {
   margin: 4px 0;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 2px;
+}
+
+.navbar:hover {
+  background: rgba(15, 15, 35, 0.5);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+    0 0 80px rgba(100, 181, 246, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Enhanced Hero Section */
@@ -1712,16 +1735,23 @@ only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-de
   .nav-menu {
     position: fixed;
     left: -100%;
-    top: 70px;
+    top: 110px;
     flex-direction: column;
-    background: rgba(15, 15, 35, 0.98);
-    backdrop-filter: blur(20px);
+    background: rgba(15, 15, 35, 0.95);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border-top: 1px solid rgba(100, 181, 246, 0.2);
-    width: 100vw;
-    height: calc(100vh - 70px);
+    border-radius: 20px;
+    margin: 0 5%;
+    width: 90%;
+    max-width: calc(100vw - 10%);
+    max-height: calc(100vh - 130px);
     text-align: center;
     transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    box-shadow:
+      0 10px 40px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 3rem 0;
     z-index: 999;
     overflow-y: auto;
