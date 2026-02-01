@@ -1715,6 +1715,8 @@ only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-de
     display: flex;
     cursor: pointer;
     margin-left: auto;
+    z-index: 2100;
+    /* Ensure toggle is always above the menu */
   }
 
   .nav-menu {
@@ -1751,8 +1753,6 @@ only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-de
     transform: translateY(-10px) rotate(-45deg);
   }
 }
-
-/* 
 
 /* Mobile Hero / Layout Adjustments */
 @media screen and (max-width: 768px) {
