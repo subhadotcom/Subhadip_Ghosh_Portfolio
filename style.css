@@ -214,12 +214,12 @@ body::after {
 .navbar {
   /* Dynamic gradient using JS --mouse-x/y for a shimmer/glint effect */
   background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.08) 0%,
       transparent 80%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(100, 181, 246, 0.1));
+    linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(100, 181, 246, 0.03));
 
-  backdrop-filter: blur(30px) saturate(150%);
-  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  backdrop-filter: blur(30px) saturate(130%);
+  -webkit-backdrop-filter: blur(30px) saturate(130%);
   position: fixed;
   top: 25px;
   left: 50%;
@@ -381,9 +381,9 @@ body::after {
 }
 
 .navbar:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(100, 181, 246, 0.2));
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(100, 181, 246, 0.08));
+  backdrop-filter: blur(35px) saturate(150%);
+  -webkit-backdrop-filter: blur(35px) saturate(150%);
   box-shadow:
     0 12px 40px rgba(0, 0, 0, 0.15),
     0 0 0 1px rgba(255, 255, 255, 0.3) inset,
@@ -2307,8 +2307,8 @@ only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-de
 .navbar-shrunk {
   padding: 0.4rem 0 !important;
   top: 15px !important;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(100, 181, 246, 0.12)) !important;
-  backdrop-filter: blur(40px) saturate(180%) !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(100, 181, 246, 0.05)) !important;
+  backdrop-filter: blur(35px) saturate(150%) !important;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2) !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
