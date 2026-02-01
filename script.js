@@ -5,7 +5,7 @@ function fixMobileViewport() {
   if (viewport) {
     viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
   }
-  
+
   // Force layout recalculation on mobile
   if (window.innerWidth <= 768) {
     document.body.style.minWidth = '320px';
@@ -21,7 +21,7 @@ fixMobileViewport();
 document.addEventListener("DOMContentLoaded", function () {
   // Apply mobile fixes again when DOM is ready
   fixMobileViewport();
-  
+
   const mobileMenu = document.getElementById("mobile-menu");
   const navMenu = document.querySelector(".nav-menu");
 
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mobileMenu.addEventListener("click", function () {
       mobileMenu.classList.toggle("active");
       navMenu.classList.toggle("active");
-      
+
       // Prevent body scroll when menu is open
       if (navMenu.classList.contains("active")) {
         document.body.style.overflow = 'hidden';
@@ -46,9 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.style.overflow = '';
       });
     });
-    
+
     // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
       if (!mobileMenu.contains(event.target) && !navMenu.contains(event.target)) {
         mobileMenu.classList.remove("active");
         navMenu.classList.remove("active");
@@ -73,21 +73,60 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Glass Glint Effect: Track mouse position to update gradient origin
-document.addEventListener("mousemove", (e) => {
+// JavaScript Powered Glass Header System
+function initGlassHeader() {
   const navbar = document.querySelector(".navbar");
   if (!navbar) return;
-  
-  const rect = navbar.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  
-  // Only apply if mouse is somewhat near the top/navbar
-  if (e.clientY < 200) {
-    navbar.style.setProperty('--mouse-x', `${x}px`);
-    navbar.style.setProperty('--mouse-y', `${y}px`);
+
+  function updateHeaderStyle() {
+    const scrollPos = window.scrollY;
+    // Calculate adaptive transparency: clearer at top, slightly more 'filtered' when scrolling
+    const transparency = Math.max(0.01, Math.min(0.05, 0.02 + (scrollPos / 1000)));
+    const blurAmount = Math.min(45, 30 + (scrollPos / 10));
+    const shadowAlpha = Math.min(0.2, 0.05 + (scrollPos / 500));
+
+    // Apply dynamic watercolor glass styles
+    navbar.style.background = `
+      radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.1) 0%, transparent 80%),
+      linear-gradient(135deg, rgba(255, 255, 255, ${transparency}), rgba(100, 181, 246, ${transparency + 0.02}))
+    `;
+    navbar.style.backdropFilter = `blur(${blurAmount}px) saturate(140%)`;
+    navbar.style.webkitBackdropFilter = `blur(${blurAmount}px) saturate(140%)`;
+    navbar.style.boxShadow = `0 8px 32px rgba(0, 0, 0, ${shadowAlpha}), 0 0 0 1px rgba(255, 255, 255, 0.1) inset`;
+    navbar.style.borderColor = `rgba(255, 255, 255, ${0.1 + (scrollPos / 1000)})`;
   }
-});
+
+  // Mouse move for dynamic glint
+  document.addEventListener("mousemove", (e) => {
+    const rect = navbar.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    if (e.clientY < 300) {
+      navbar.style.setProperty('--mouse-x', `${x}px`);
+      navbar.style.setProperty('--mouse-y', `${y}px`);
+    }
+  });
+
+  // Hover states via JS
+  navbar.addEventListener("mouseenter", () => {
+    navbar.style.transition = "all 0.3s ease";
+    navbar.style.background = `
+      radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.15) 0%, transparent 80%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(100, 181, 246, 0.1))
+    `;
+  });
+
+  navbar.addEventListener("mouseleave", updateHeaderStyle);
+
+  // Scroll listener
+  window.addEventListener("scroll", throttle(updateHeaderStyle, 10));
+
+  // Initial run
+  updateHeaderStyle();
+}
+
+// Ensure it loads
+document.addEventListener("DOMContentLoaded", initGlassHeader);
 
 // Enhanced Scroll Reveal Animation System with Intersection Observer
 function initScrollReveal() {
@@ -97,7 +136,7 @@ function initScrollReveal() {
     rootMargin: '0px 0px -50px 0px' // Start animation 50px before element enters viewport
   };
 
-  const observer = new IntersectionObserver(function(entries) {
+  const observer = new IntersectionObserver(function (entries) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
@@ -315,7 +354,7 @@ function initNavigationHighlighting() {
   });
 
   // Handle scroll to top case (show home as active)
-  window.addEventListener('scroll', function() {
+  window.addEventListener('scroll', function () {
     if (window.scrollY < 100) {
       navLinks.forEach((link) => {
         link.classList.remove("nav-active");
@@ -480,51 +519,51 @@ function handleMobileFooterLayout() {
   const footerContent = document.querySelector('.footer-content');
   const footerLeft = document.querySelector('.footer-left');
   const footerRight = document.querySelector('.footer-right');
-  
+
   if (!footerContent || !footerLeft || !footerRight) return;
-  
+
   function updateFooterLayout() {
     const isMobile = window.innerWidth <= 768;
-    
+
     if (isMobile) {
       // On mobile: center footer-left and hide footer-right
       footerContent.style.flexDirection = 'column';
       footerContent.style.alignItems = 'center';
       footerContent.style.textAlign = 'center';
-      
+
       footerLeft.style.display = 'block';
       footerLeft.style.width = '100%';
       footerLeft.style.textAlign = 'center';
       footerLeft.style.marginBottom = '0';
-      
+
       footerRight.style.display = 'none';
     } else {
       // On desktop: restore original layout
       footerContent.style.flexDirection = 'row';
       footerContent.style.alignItems = 'center';
       footerContent.style.textAlign = 'left';
-      
+
       footerLeft.style.display = 'block';
       footerLeft.style.width = 'auto';
       footerLeft.style.textAlign = 'left';
       footerLeft.style.marginBottom = '0';
-      
+
       footerRight.style.display = 'flex';
     }
   }
-  
+
   // Initial call
   updateFooterLayout();
-  
+
   // Update on window resize
   window.addEventListener('resize', updateFooterLayout);
 }
 
 
 // Window resize handler for mobile responsiveness
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
   fixMobileViewport();
-  
+
   // Close mobile menu on resize to larger screen
   if (window.innerWidth > 768) {
     const mobileMenu = document.getElementById("mobile-menu");
@@ -558,26 +597,26 @@ function initMagneticCursor() {
   function animateCursor() {
     cursorX += (mouseX - cursorX) * 0.1;
     cursorY += (mouseY - cursorY) * 0.1;
-    
+
     cursor.style.left = cursorX + 'px';
     cursor.style.top = cursorY + 'px';
-    
+
     cursorDot.style.left = mouseX + 'px';
     cursorDot.style.top = mouseY + 'px';
-    
+
     requestAnimationFrame(animateCursor);
   }
   animateCursor();
 
   // Add hover effects for interactive elements
   const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-category, .social-link');
-  
+
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.classList.add('cursor-grow');
       cursorDot.classList.add('cursor-dot-hidden');
     });
-    
+
     el.addEventListener('mouseleave', () => {
       cursor.classList.remove('cursor-grow');
       cursorDot.classList.remove('cursor-dot-hidden');
@@ -593,7 +632,7 @@ function initTypewriterEffect() {
   const text = heroTitle.textContent;
   heroTitle.textContent = '';
   heroTitle.classList.add('typewriter');
-  
+
   let i = 0;
   function typeChar() {
     if (i < text.length) {
@@ -604,18 +643,18 @@ function initTypewriterEffect() {
       heroTitle.classList.remove('typewriter');
     }
   }
-  
+
   setTimeout(typeChar, 1000);
 }
 
 // Parallax scrolling effect
 function initParallaxEffect() {
   const parallaxElements = document.querySelectorAll('.hero-avatar, .profile-photo');
-  
+
   window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const rate = scrolled * -0.5;
-    
+
     parallaxElements.forEach(el => {
       el.style.transform = `translateY(${rate}px)`;
     });
@@ -625,13 +664,13 @@ function initParallaxEffect() {
 // Project card hover effects
 function initProjectCardInteractions() {
   const projectCards = document.querySelectorAll('.project-card');
-  
+
   projectCards.forEach(card => {
     card.addEventListener('mouseenter', () => {
       card.style.transform = 'translateY(-10px) scale(1.02)';
       card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.2)';
     });
-    
+
     card.addEventListener('mouseleave', () => {
       card.style.transform = 'translateY(0) scale(1)';
       card.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
@@ -642,7 +681,7 @@ function initProjectCardInteractions() {
 // Smooth page transitions
 function initSmoothTransitions() {
   const links = document.querySelectorAll('a[href^="#"]');
-  
+
   links.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -664,7 +703,7 @@ function initSmoothTransitions() {
 // Text animation on scroll
 function initTextAnimations() {
   const textElements = document.querySelectorAll('.section-title, .section-subtitle');
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -673,29 +712,29 @@ function initTextAnimations() {
       }
     });
   }, { threshold: 0.1 });
-  
+
   textElements.forEach(el => observer.observe(el));
 }
 
 // Initialize all functionality when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   console.log("Portfolio website loaded successfully!");
-  
+
   // Apply mobile fixes first
   fixMobileViewport();
-  
+
   // Initialize new modern effects
   if (window.innerWidth > 768) {
     initMagneticCursor();
     initParallaxEffect();
   }
-  
+
   initTypewriterEffect();
   initProjectCardInteractions();
   initSmoothTransitions();
   initTextAnimations();
   handleMobileFooterLayout();
-  
+
   initSkillTilt();
 
   // Initialize all new features
@@ -710,7 +749,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initial check for elements already in viewport
   setTimeout(revealOnScroll, 100);
-  
+
   // Force a layout recalculation for mobile
   setTimeout(() => {
     if (window.innerWidth <= 768) {
@@ -722,60 +761,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Disable right-click, keyboard shortcuts, and browser inspection
 document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-    alert('Right-click is disabled to protect the content.');
+  e.preventDefault();
+  alert('Right-click is disabled to protect the content.');
 });
 
 // Disable keyboard shortcuts
 document.addEventListener('keydown', (e) => {
-    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-    if (
-        e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) ||
-        (e.ctrlKey && (e.key === 'U' || e.key === 'u'))
-    ) {
-        e.preventDefault();
-        alert('This action is disabled to protect the content.');
-    }
+  // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+  if (
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) ||
+    (e.ctrlKey && (e.key === 'U' || e.key === 'u'))
+  ) {
+    e.preventDefault();
+    alert('This action is disabled to protect the content.');
+  }
 });
 
 // Prevent opening developer tools
-(function() {
-    // Prevent opening developer tools
-    const devtools = /./;
-    devtools.toString = function() {
-        this.opened = true;
-    }
-    console.log('%c', devtools);
-    devtools.opened = false;
+(function () {
+  // Prevent opening developer tools
+  const devtools = /./;
+  devtools.toString = function () {
+    this.opened = true;
+  }
+  console.log('%c', devtools);
+  devtools.opened = false;
 
-    setInterval(function() {
-        if (devtools.opened) {
-            alert('Developer tools are disabled to protect the content.');
-            window.location.reload();
-        }
-    }, 1000);
+  setInterval(function () {
+    if (devtools.opened) {
+      alert('Developer tools are disabled to protect the content.');
+      window.location.reload();
+    }
+  }, 1000);
 })();
 
 // Prevent taking screenshots
 document.addEventListener('keyup', (e) => {
-    if (e.key === 'PrintScreen') {
-        navigator.clipboard.writeText('');
-        alert('Screenshots are disabled to protect the content.');
-    }
+  if (e.key === 'PrintScreen') {
+    navigator.clipboard.writeText('');
+    alert('Screenshots are disabled to protect the content.');
+  }
 });
 
 // Prevent drag and drop
 document.addEventListener('dragstart', (e) => {
-    e.preventDefault();
+  e.preventDefault();
 });
 
 // Prevent text selection
 document.addEventListener('selectstart', (e) => {
-    e.preventDefault();
+  e.preventDefault();
 });
 
 // Prevent image dragging
 document.querySelectorAll('img').forEach(img => {
-    img.setAttribute('draggable', 'false');
+  img.setAttribute('draggable', 'false');
 });

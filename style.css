@@ -212,14 +212,6 @@ body::after {
 
 /* Enhanced Navigation Styles - Watercolor Glass Design */
 .navbar {
-  /* Dynamic gradient using JS --mouse-x/y for a shimmer/glint effect */
-  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(255, 255, 255, 0.08) 0%,
-      transparent 80%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(100, 181, 246, 0.03));
-
-  backdrop-filter: blur(30px) saturate(130%);
-  -webkit-backdrop-filter: blur(30px) saturate(130%);
   position: fixed;
   top: 25px;
   left: 50%;
@@ -229,17 +221,13 @@ body::after {
   z-index: 1000;
   padding: 0.8rem 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.15) inset,
-    0 0 40px rgba(100, 181, 246, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  /* Managed by JS */
   border-radius: 50px;
   min-height: 65px;
   display: flex;
   align-items: center;
   overflow: hidden;
-  /* For the glint effect */
 }
 
 .nav-container {
@@ -380,16 +368,7 @@ body::after {
   border-radius: 2px;
 }
 
-.navbar:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(100, 181, 246, 0.08));
-  backdrop-filter: blur(35px) saturate(150%);
-  -webkit-backdrop-filter: blur(35px) saturate(150%);
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.3) inset,
-    0 0 60px rgba(100, 181, 246, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-}
+/* Dynamic styles managed by JS */
 
 /* Enhanced Hero Section */
 .hero {
@@ -2307,10 +2286,7 @@ only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-de
 .navbar-shrunk {
   padding: 0.4rem 0 !important;
   top: 15px !important;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(100, 181, 246, 0.05)) !important;
-  backdrop-filter: blur(35px) saturate(150%) !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2) !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
+  /* Dynamic style property updates handled by JS now */
 }
 
 .navbar-shrunk .nav-logo a {
