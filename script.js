@@ -73,15 +73,19 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Navbar Background Change on Scroll (Dark Mode)
-window.addEventListener("scroll", function () {
+// Glass Glint Effect: Track mouse position to update gradient origin
+document.addEventListener("mousemove", (e) => {
   const navbar = document.querySelector(".navbar");
-  if (window.scrollY > 100) {
-    navbar.style.background = "rgba(26, 26, 26, 0.98)";
-    navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.4)";
-  } else {
-    navbar.style.background = "rgba(26, 26, 26, 0.95)";
-    navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.3)";
+  if (!navbar) return;
+  
+  const rect = navbar.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  // Only apply if mouse is somewhat near the top/navbar
+  if (e.clientY < 200) {
+    navbar.style.setProperty('--mouse-x', `${x}px`);
+    navbar.style.setProperty('--mouse-y', `${y}px`);
   }
 });
 
